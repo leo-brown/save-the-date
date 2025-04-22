@@ -116,10 +116,14 @@ class STD {
 				$guest[$key] = $value;
 			}
 			$this->saveJson('guests', $guests);
+			ob_start();
 			include(__DIR__ . '/../pages/thank-you.php');
+			$content = ob_get_clean();
+			include(__DIR__ . '/../pages/layout.php');
 			return;
 		}
 
+		ob_start();
 		if ($groupPage && file_exists(__DIR__ . '/../pages/' . $groupPage . '.php')) {
 			$guest_code = $code;
 			include(__DIR__ . '/../pages/' . $groupPage . '.php');
@@ -127,6 +131,8 @@ class STD {
 			echo "<h1>Hello {$guest['first_name']}!</h1>";
 			echo "<p>You are invited to the {$guest['group']}.</p>";
 		}
+		$content = ob_get_clean();
+		include(__DIR__ . '/../pages/layout.php');
 	}
 
 	private function loadJson($file) {
@@ -140,3 +146,4 @@ class STD {
 		file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
 	}
 }
+

@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>RSVP Received</title>
-	<link rel="stylesheet" href="/style.css">
-</head>
-<body>
-	<h1>Thanks for RSVPing!</h1>
-	<p>We’ve saved your response. Looking forward to seeing you!</p>
-</body>
-</html>
-
+<section id="thank-you">
+	<h1>Thank You!</h1>
+	<p>Your RSVP has been received.</p>
+	<p>We're so excited to celebrate with you!</p>
+</section>
