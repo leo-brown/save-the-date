@@ -1,0 +1,12 @@
+[
+	{
+		"name": "wedding",
+		"page": "full-invite",
+		"fields": ["number_of_guests", "dietary_preference"]
+	},
+	{
+		"name": "reception-only",
+		"page": "reception-only",
+		"fields": ["number_of_guests", "dietary_preference"]
+	}
+]
