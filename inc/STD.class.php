@@ -68,7 +68,15 @@ class STD {
 				}
 			}
 			echo "<td>" . implode("<br>", $extras) . "</td>";
-			echo "<td>" . htmlspecialchars($g['code']) . "</td>";
+
+			$codeLink = '/' . urlencode($g['code']);
+			$qrImg = '/qr.php?code=' . urlencode($g['code']);
+			echo "<td>
+				<a href='$codeLink'>
+				<img src='$qrImg' alt='QR Code' style='width:80px;height:80px;'>
+			        </a>
+			</td>";
+
 			echo "<td><form method='post'><button name='delete' value='" . htmlspecialchars($g['code']) . "'>Delete</button></form></td>";
 			echo "</tr>";
 		}
@@ -104,8 +112,10 @@ class STD {
 		}
 
 		$groupPage = null;
+		$groupFields = [];
 		foreach ($groups as $group) {
 			if ($group['name'] === $guest['group']) {
+				$groupFields = $group['fields'] ?? [];
 				$groupPage = $group['page'];
 				break;
 			}
@@ -146,4 +156,3 @@ class STD {
 		file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
 	}
 }
-

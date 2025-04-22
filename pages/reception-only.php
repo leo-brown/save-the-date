@@ -19,18 +19,25 @@
 	<p>8:00 PM – Dancing & Cake</p>
 </section>
 
-<section id="rsvp">
+<section id="rsvp" class="decorated">
 	<h2>RSVP</h2>
 	<form method="post">
-		<label>Number of Guests:
-			<input type="number" name="number_of_guests" value="<?= htmlspecialchars($guest['number_of_guests'] ?? '') ?>">
-		</label>
-
-		<label>Dietary Preference:
-			<input type="text" name="dietary_preference" value="<?= htmlspecialchars($guest['dietary_preference'] ?? '') ?>">
-		</label>
+		<?php foreach ($groupFields as $field): ?>
+			<?php if ($field === 'number_of_guests'): ?>
+				<label>Number of Guests:
+					<input type="number" name="number_of_guests" value="<?= htmlspecialchars($guest['number_of_guests'] ?? '') ?>">
+				</label>
+			<?php elseif ($field === 'dietary_preference'): ?>
+				<label>Dietary Preference:
+					<input type="text" name="dietary_preference" value="<?= htmlspecialchars($guest['dietary_preference'] ?? '') ?>">
+				</label>
+			<?php else: ?>
+				<label><?= ucwords(str_replace('_', ' ', $field)) ?>:
+					<input type="text" name="<?= $field ?>" value="<?= htmlspecialchars($guest[$field] ?? '') ?>">
+				</label>
+			<?php endif; ?>
+		<?php endforeach; ?>
 
 		<button type="submit">Submit RSVP</button>
 	</form>
 </section>
-
