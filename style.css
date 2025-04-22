@@ -1,75 +1,141 @@
-/* Base styles */
-body, html {
+/* -------------------------------------
+   Base Reset and Layout Setup
+-------------------------------------- */
+* {
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: 'Georgia', serif;
-	background-color: #fffaf6;
-	color: #3e3e3e;
-	overflow-x: hidden;
-	scroll-behavior: smooth;
 }
 
+html, body {
+	width: 100%;
+	max-width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	font-family: 'Georgia', serif;
+	background-color: #fffaf6;
+	color: #4a3b2d;
+	line-height: 1.8;
+	font-size: 18px;
+	overscroll-behavior-x: none;
+}
+
+/* -------------------------------------
+   Typography
+-------------------------------------- */
 h1, h2, h3 {
-	font-family: 'Playfair Display', serif;
-	font-weight: 400;
+	font-family: 'Georgia', serif;
+	font-weight: normal;
+	color: #5c3b2e;
+	text-align: center;
 	margin-bottom: 1rem;
+}
+
+h1 {
+	font-size: 3rem;
+	margin-bottom: 0.5rem;
+}
+
+h2 {
+	font-size: 2rem;
 }
 
 p {
-	line-height: 1.6;
+	font-size: 1.1rem;
+	text-align: center;
 	margin: 0.5rem 0;
 }
 
-/* Layout */
+/* -------------------------------------
+   Section Layouts
+-------------------------------------- */
 main {
-	scroll-snap-type: y mandatory;
 	height: 100vh;
-	overflow-y: scroll;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	scroll-snap-type: y mandatory;
+	position: relative;
 }
-
 section {
 	min-height: 100vh;
+	width: 100%;
+	padding: 4rem 1.5rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: center; /* Only this for non-cover sections */
 	align-items: center;
-	padding: 3rem 2rem;
 	scroll-snap-align: start;
+	background-color: #fffaf6;
+	box-sizing: border-box;
 }
 
+.cover-content.cover-split {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%; /* ← This ensures top & bottom content are separated */
+	width: 100%;
+	padding: 4rem 2rem;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+/* Alternate background for even sections */
 section:nth-child(even) {
-	background-color: #f7f3ef;
+	background-color: #f9f5f0;
 }
 
-/* RSVP form */
+/* -------------------------------------
+   Form Styling
+-------------------------------------- */
 form {
-	background: #fff;
-	border: 1px solid #ddd;
-	padding: 1.5rem;
-	border-radius: 8px;
 	width: 100%;
 	max-width: 500px;
-	box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+	background: #ffffff;
+	padding: 2rem;
+	border-radius: 12px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+	box-sizing: border-box;
 }
 
-input, select {
-	width: 95%;
-	padding: 0.6rem;
-	margin-top: 0.5rem;
-	margin-bottom: 1rem;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+label {
+	display: block;
+	margin-bottom: 1.5rem;
 	font-size: 1rem;
+	color: #5c3b2e;
 }
 
+input,
+select {
+	width: 100%;
+	max-width: 100%;
+	padding: 0.75rem 1rem;
+	margin-top: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 1.1rem;
+	background: #fff;
+	box-sizing: border-box;
+}
+
+/* -------------------------------------
+   Button Styling
+-------------------------------------- */
 button {
 	background-color: #a0522d;
 	color: white;
 	border: none;
-	padding: 0.7rem 1.5rem;
-	border-radius: 4px;
+	padding: 0.8rem 2rem;
+	font-size: 1.1rem;
+	border-radius: 6px;
 	cursor: pointer;
-	font-size: 1rem;
+	transition: background-color 0.3s ease;
+	margin-top: 1rem;
 }
 
 button:hover {
@@ -79,29 +145,52 @@ button:hover {
 
 
 
-section.decorated {
+
+
+
+
+
+.cover-section {
+	background-image: url('/leo-and-lydia.jpg');
+	background-size: cover;
+	background-position: center;
 	position: relative;
-	overflow: hidden;
+	color: #4a3b2d;
 }
 
-section.decorated::before,
-section.decorated::after {
-	content: '❦';
+/* Soft white overlay over image */
+.cover-section::before {
+	content: '';
 	position: absolute;
-	font-size: 4rem;
-	color: #e0cfc2;
-	opacity: 0.3;
+	inset: 0;
+	background-color: rgba(255, 255, 255, 0.5);
 	z-index: 0;
 }
 
-section.decorated::before {
-	top: 1rem;
-	left: 1rem;
-	transform: rotate(-15deg);
+/* Split layout: top + bottom, not centered */
+.cover-content.cover-split {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;  /* ← key to prevent centering */
+	height: 100%;
+	width: 100%;
+	padding: 4rem 2rem;
+	text-align: center;
+	box-sizing: border-box;
 }
 
-section.decorated::after {
-	bottom: 1rem;
-	right: 1rem;
-	transform: rotate(15deg);
+.cover-top {
+	margin-top: 2rem;
 }
+
+.cover-bottom {
+	margin-bottom: 3rem;
+}
+
+#cover {
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
